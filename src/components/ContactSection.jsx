@@ -206,13 +206,19 @@ export const ContactSection = () => {
               </div>
             </div>
 
-            {/* Map Placeholder */}
-            <div className="bg-gray-300 h-64 rounded-xl flex items-center justify-center">
-              <div className="text-center text-gray-600">
-                <div className="text-4xl mb-2">🗺️</div>
-                <p className="font-semibold">Google Maps Integration</p>
-                <p className="text-sm">Interactive map would be here</p>
-              </div>
+            {/* Google Maps Embed */}
+            <div className="overflow-hidden rounded-xl shadow-lg">
+              <iframe
+                title="Google Map"
+                src="https://www.google.com/maps?q=74+Janseva+Society+5th+Road+Santacruz+East+Mumbai+400055&output=embed"
+                width="100%"
+                height="256"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="w-full h-64"
+              ></iframe>
             </div>
           </div>
         </div>
