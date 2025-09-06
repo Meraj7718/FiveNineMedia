@@ -7,6 +7,18 @@ import {
 	route,
 } from '@react-router/dev/routes';
 
+// Extend ImportMeta to include 'hot' property for Vite HMR
+declare global {
+	interface ImportMeta {
+		hot?: {
+			accept: (callback?: (mod: unknown) => void) => void;
+			invalidate: () => void;
+		};
+		glob: (pattern: string, options?: unknown) => Record<string, () => Promise<unknown>>;
+		env?: Record<string, string | boolean | undefined>;
+	}
+}
+
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 type Tree = {
@@ -104,7 +116,7 @@ function generateRoutes(node: Tree): RouteConfigEntry[] {
 
 	return routes;
 }
-if (import.meta.env.DEV) {
+if (import.meta.env && import.meta.env.DEV) {
 	import.meta.glob('./**/page.jsx', {});
 	if (import.meta.hot) {
 		import.meta.hot.accept((newSelf) => {

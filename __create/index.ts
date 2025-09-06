@@ -246,17 +246,95 @@
 // });
 
 
+// import { AsyncLocalStorage } from 'node:async_hooks';
+// import nodeConsole from 'node:console';
+// import { Hono } from 'hono';
+// import { requestId } from 'hono/request-id';
+// import { contextStorage } from 'hono/context-storage';
+// import { cors } from 'hono/cors';
+// import { createHonoServer } from 'react-router-hono-server/node';
+// // import ws from 'ws'; // Removed unused import
+// import sql from '../src/app/api/utils/sql.js';
+// import contactRoute from '../src/app//api/contact/route.js'; //<- updated import
+// import quotesRoute from  '../src/app/api/quotes/route.js'
+
+// // AsyncLocalStorage for requestId logging
+// const als = new AsyncLocalStorage<{ requestId: string }>();
+// for (const method of ['log', 'info', 'warn', 'error', 'debug'] as const) {
+//   const original = nodeConsole[method].bind(console);
+//   console[method] = (...args: unknown[]) => {
+//     const requestId = als.getStore()?.requestId;
+//     if (requestId) {
+//       original(`[traceId:${requestId}]`, ...args);
+//     } else {
+//       original(...args);
+//     }
+//   };
+// }
+
+// const app = new Hono();
+
+// // Middleware
+// app.use('*', requestId());
+// app.use('*', (c, next) => {
+//   const requestId = c.get('requestId');
+//   return als.run({ requestId }, () => next());
+// });
+// app.use(contextStorage());
+
+// if (process.env.CORS_ORIGINS) {
+//   app.use(
+//     '/*',
+//     cors({
+//       origin: process.env.CORS_ORIGINS.split(',').map((origin) => origin.trim()),
+//     })
+//   );
+// }
+
+// // Mount the contact route under /api/contact
+// app.route('/api/contact', contactRoute);
+// app.route('/api/quotes', quotesRoute);
+
+
+// // Optional: add a health check route
+// app.get('/api/health', (c) => c.json({ status: 'ok' }));
+
+// // Error handling
+// app.onError((err, c) => {
+//   console.error('Unhandled error:', err);
+//   return c.json({ error: 'Internal Server Error' }, 500);
+// });
+
+// // Debug logging at top level
+// console.log('DEBUG ENV:', {
+//   NODE_ENV: process.env.NODE_ENV,
+//   DATABASE_URL: process.env.DATABASE_URL,
+//   CORS_ORIGINS: process.env.CORS_ORIGINS,
+//   NEXT_PUBLIC_CREATE_BASE_URL: process.env.NEXT_PUBLIC_CREATE_BASE_URL,
+//   NEXT_PUBLIC_CREATE_HOST: process.env.NEXT_PUBLIC_CREATE_HOST,
+//   NEXT_PUBLIC_PROJECT_GROUP_ID: process.env.NEXT_PUBLIC_PROJECT_GROUP_ID,
+// });
+// console.log('DEBUG process.cwd():', process.cwd());
+
+// const indexPromise = createHonoServer({ app, defaultLogger: false });
+// export default indexPromise;
+
 import { AsyncLocalStorage } from 'node:async_hooks';
 import nodeConsole from 'node:console';
+import path from 'path';
 import { Hono } from 'hono';
 import { requestId } from 'hono/request-id';
 import { contextStorage } from 'hono/context-storage';
 import { cors } from 'hono/cors';
 import { createHonoServer } from 'react-router-hono-server/node';
-// import ws from 'ws'; // Removed unused import
 import sql from '../src/app/api/utils/sql.js';
-import contactRoute from '../src/app//api/contact/route.js'; //<- updated import
-import quotesRoute from  '../src/app/api/quotes/route.js'
+
+// Safe route imports
+import contactRouteRaw from '../src/app/api/contact/route.js';
+import quotesRouteRaw from '../src/app/api/quotes/route.js';
+
+const contactRoute = contactRouteRaw || {};
+const quotesRoute = quotesRouteRaw || {};
 
 // AsyncLocalStorage for requestId logging
 const als = new AsyncLocalStorage<{ requestId: string }>();
@@ -282,21 +360,17 @@ app.use('*', (c, next) => {
 });
 app.use(contextStorage());
 
+// CORS setup
 if (process.env.CORS_ORIGINS) {
-  app.use(
-    '/*',
-    cors({
-      origin: process.env.CORS_ORIGINS.split(',').map((origin) => origin.trim()),
-    })
-  );
+  const origins = process.env.CORS_ORIGINS.split(',').map((origin) => origin.trim());
+  app.use('/*', cors({ origin: origins }));
 }
 
-// Mount the contact route under /api/contact
+// Mount API routes safely
 app.route('/api/contact', contactRoute);
 app.route('/api/quotes', quotesRoute);
 
-
-// Optional: add a health check route
+// Health check
 app.get('/api/health', (c) => c.json({ status: 'ok' }));
 
 // Error handling
@@ -305,7 +379,7 @@ app.onError((err, c) => {
   return c.json({ error: 'Internal Server Error' }, 500);
 });
 
-// Debug logging at top level
+// Debug logging
 console.log('DEBUG ENV:', {
   NODE_ENV: process.env.NODE_ENV,
   DATABASE_URL: process.env.DATABASE_URL,
@@ -316,5 +390,9 @@ console.log('DEBUG ENV:', {
 });
 console.log('DEBUG process.cwd():', process.cwd());
 
+// Safe path usage example (if needed)
+const routesPath = process.env.ROUTES_PATH || path.join(process.cwd(), 'src/app/api');
+
+// Export Hono server
 const indexPromise = createHonoServer({ app, defaultLogger: false });
 export default indexPromise;

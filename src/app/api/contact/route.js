@@ -254,7 +254,8 @@ contact.post('/', async (c) => {
       RETURNING id, created_at
     `;
 
-    const { id, created_at } = rows;
+    // `rows` is an array of result rows; take the first one
+    const { id, created_at } = rows[0] || {};
 
     return c.json({
       success: true,
@@ -282,10 +283,11 @@ contact.get('/', async (c) => {
       LIMIT ${limit} OFFSET ${offset}
     `;
 
-    const totalRows = await sql`SELECT COUNT(*) AS count FROM contact_submissions`;
-    const total = Number(totalRows.count ?? 0);
+  const totalRows = await sql`SELECT COUNT(*) AS count FROM contact_submissions`;
+  // totalRows is an array like [{ count: '1' }]
+  const total = Number(totalRows[0]?.count ?? 0);
 
-    return c.json({ submissions, total, limit, offset });
+  return c.json({ submissions, total, limit, offset });
   } catch (error) {
     console.error('Failed to fetch contact submissions:', error);
     return c.json({ error: 'Failed to fetch contact submissions' }, 500);

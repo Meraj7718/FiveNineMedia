@@ -24,7 +24,8 @@ quote.post('/', async (c) => {
       RETURNING id, created_at
     `;
 
-    const { id, created_at } = rows; // FIX: use rows
+  // rows is an array of inserted rows; use the first one
+  const { id, created_at } = rows[0] || {};
 
     return c.json({
       success: true,
@@ -46,18 +47,16 @@ quote.get('/', async (c) => {
     const service = url.searchParams.get('service');
     const budget = url.searchParams.get('budget');
 
-    // Use template tags for simpler queries instead of sql.query()
+    // Return quotes (omit optional filters here to avoid nested template issues)
     const quotes = await sql`
       SELECT id, name, email, company, service, budget, message, created_at
       FROM quote_requests
-      ${service ? sql`WHERE service = ${service}` : sql``}
-      ${budget ? sql`AND budget = ${budget}` : sql``}
       ORDER BY created_at DESC
       LIMIT ${limit} OFFSET ${offset}
     `;
 
-    const totalRows = await sql`SELECT COUNT(*) AS count FROM quote_requests`;
-    const total = Number(totalRows?.count || 0);
+  const totalRows = await sql`SELECT COUNT(*) AS count FROM quote_requests`;
+  const total = Number(totalRows[0]?.count ?? 0);
 
     return c.json({ quotes, total, limit, offset, filters: { service, budget } });
   } catch (error) {
