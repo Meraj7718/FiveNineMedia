@@ -270,12 +270,37 @@ contact.post('/', async (c) => {
 });
 
 // GET /api/contact
+// contact.get('/', async (c) => {
+//   try {
+//     const url = new URL(c.req.url);
+//     const limit = Number(url.searchParams.get('limit') ?? 50);
+//     const offset = Number(url.searchParams.get('offset') ?? 0);
+
+//     const submissions = await sql`
+//       SELECT id, name, email, phone, message, created_at
+//       FROM contact_submissions
+//       ORDER BY created_at DESC
+//       LIMIT ${limit} OFFSET ${offset}
+//     `;
+
+//   const totalRows = await sql`SELECT COUNT(*) AS count FROM contact_submissions`;
+//   // totalRows is an array like [{ count: '1' }]
+//   const total = Number(totalRows[0]?.count ?? 0);
+
+//   return c.json({ submissions, total, limit, offset });
+//   } catch (error) {
+//     console.error('Failed to fetch contact submissions:', error);
+//     return c.json({ error: 'Failed to fetch contact submissions' }, 500);
+//   }
+// });
+
 contact.get('/', async (c) => {
   try {
     const url = new URL(c.req.url);
     const limit = Number(url.searchParams.get('limit') ?? 50);
     const offset = Number(url.searchParams.get('offset') ?? 0);
 
+    // All submissions (existing)
     const submissions = await sql`
       SELECT id, name, email, phone, message, created_at
       FROM contact_submissions
@@ -283,11 +308,19 @@ contact.get('/', async (c) => {
       LIMIT ${limit} OFFSET ${offset}
     `;
 
-  const totalRows = await sql`SELECT COUNT(*) AS count FROM contact_submissions`;
-  // totalRows is an array like [{ count: '1' }]
-  const total = Number(totalRows[0]?.count ?? 0);
+    // Total submissions count
+    const totalRows = await sql`SELECT COUNT(*) AS count FROM contact_submissions`;
+    const total = Number(totalRows[0]?.count ?? 0);
 
-  return c.json({ submissions, total, limit, offset });
+    // Count for today
+    const todayRows = await sql`
+      SELECT COUNT(*) AS count
+      FROM contact_submissions
+      WHERE DATE(created_at) = CURRENT_DATE
+    `;
+    const todayCount = Number(todayRows[0]?.count ?? 0);
+
+    return c.json({ submissions, total, todayCount, limit, offset });
   } catch (error) {
     console.error('Failed to fetch contact submissions:', error);
     return c.json({ error: 'Failed to fetch contact submissions' }, 500);
