@@ -165,11 +165,11 @@ export const QuoteModal = ({ isOpen, onClose }) => {
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2563EB] focus:border-transparent disabled:opacity-50"
               >
                 <option value="">Select a service</option>
-                <option value="seo">SEO Optimization</option>
-                <option value="social">Social Media Marketing</option>
-                <option value="brand">Brand Strategy</option>
-                <option value="analytics">Digital Analytics</option>
-                <option value="all">Complete Marketing Package</option>
+                <option value="seo">Bus Branding</option>
+                <option value="social">Social Media Advertising</option>
+                <option value="brand">Train Advertisement</option>
+                <option value="analytics">TV AID's</option>
+                <option value="all">BusStop/Railway Station Advertising</option>
               </select>
             </div>
             <div>
@@ -188,10 +188,10 @@ export const QuoteModal = ({ isOpen, onClose }) => {
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2563EB] focus:border-transparent disabled:opacity-50"
               >
                 <option value="">Select budget range</option>
-                <option value="5k-10k">$5,000 - $10,000</option>
-                <option value="10k-25k">$10,000 - $25,000</option>
-                <option value="25k-50k">$25,000 - $50,000</option>
-                <option value="50k+">$50,000+</option>
+                <option value="5k-10k">₹5,000 - ₹10,000</option>
+                <option value="10k-25k">₹10,000 - ₹25,000</option>
+                <option value="25k-50k">₹25,000 - ₹50,000</option>
+                <option value="50k+">₹50,000+</option>
               </select>
             </div>
             <div>

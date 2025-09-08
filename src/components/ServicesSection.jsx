@@ -4,12 +4,12 @@ export const ServicesSection = () => {
   const services = [
     {
       icon: "🎯",
-      title: "SEO Optimization",
+      title: "OUTDOOR ADVERTISING",
       description:
-        "Boost your search engine rankings and drive organic traffic to your website with our proven SEO strategies.",
+        "Boost your brand visibility and reach your target audience effectively with our outdoor advertising solutions.",
       features: [
-        "Keyword Research",
-        "On-page SEO",
+        "Billboard Advertising",
+        "Transit Advertising",
         "Link Building",
         "Analytics Tracking",
       ],
