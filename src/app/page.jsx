@@ -22,7 +22,6 @@
 // import { Footer } from "../components/Footer.jsx";
 // import { QuoteModal } from "../components/QuoteModal.jsx";
 
-
 // export default function MarketingProApp() {
 //   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
 
@@ -90,7 +89,7 @@ import { ContactSection } from "../components/ContactSection.jsx";
 import { Footer } from "../components/Footer.jsx";
 import { QuoteModal } from "../components/QuoteModal.jsx";
 
-export default function Page() {
+export default function Home() {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
 
   useEffect(() => {
