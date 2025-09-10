@@ -123,6 +123,8 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
+  console.log("Home page loaded");
+
   return (
     <div className="font-inter" style={{ scrollBehavior: "smooth" }}>
       <Header onGetQuoteClick={() => setIsQuoteModalOpen(true)} />
