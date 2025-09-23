@@ -200,7 +200,7 @@ export const ContactSection = () => {
                   </div>
                   <div>
                     <div className="font-semibold text-[#111827]">Email</div>
-                    <div className="text-gray-600">aaseemshaikh@five9media.in</div>
+                    <div className="text-gray-600">aaseemshaikhfive9media.in</div>
                   </div>
                 </div>
               </div>

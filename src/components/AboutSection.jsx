@@ -7,7 +7,7 @@ export const AboutSection = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <h2 className="text-4xl md:text-5xl font-bold text-[#111827] mb-6">
-              About MarketingPro
+              About Five(9) Media
             </h2>
             <p className="text-lg text-gray-600 mb-6">
               We are a team of passionate marketing professionals dedicated to

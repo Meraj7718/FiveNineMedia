@@ -8,8 +8,8 @@ export const services = [
     features: [
       "Billboard Advertising",
       "Transit Advertising",
-      "Link Building",
-      "Analytics Tracking",
+      "Train Advertising",
+      "Bus Advertising",
     ],
   },
   {
