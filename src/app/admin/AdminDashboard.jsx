@@ -69,7 +69,7 @@ export default function AdminDashboard() {
       if (type === "contact") {
         setContactSubmissions((prev) => prev.filter((item) => item.id !== id));
         setStats((prev) => ({ ...prev, totalContacts: prev.totalContacts - 1 }));
-      } else if (type === "quote") {
+      } else if (type === "quotes") {
         setQuoteRequests((prev) => prev.filter((item) => item.id !== id));
         setStats((prev) => ({ ...prev, totalQuotes: prev.totalQuotes - 1 }));
       }
@@ -227,7 +227,7 @@ export default function AdminDashboard() {
                   <td className="border-b p-2">{formatDate(item.created_at)}</td>
                   <td className="border-b p-2">
                     <button
-                      onClick={() => handleDelete("quote", item.id)}
+                      onClick={() => handleDelete("quotes", item.id)}
                       className="bg-red-500 text-white px-2 py-1 rounded"
                     >
                       Delete

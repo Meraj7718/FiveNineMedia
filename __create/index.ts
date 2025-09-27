@@ -331,7 +331,7 @@ import sql from '../src/app/api/utils/sql.js';
 
 // Safe route imports
 import contactRouteRaw from '../src/app/api/contact/route.js';
-import quotesRouteRaw from '../src/app/api/quotes/route.js';
+import quotesRouteRaw from '../src/app/api/quotes/route.ts';
 
 const contactRoute = contactRouteRaw || {};
 const quotesRoute = quotesRouteRaw || {};
