@@ -177,6 +177,7 @@ export default function AdminDashboard() {
               <tr>
                 <th className="border-b p-2">Name</th>
                 <th className="border-b p-2">Email</th>
+                <th className="border-b p-2">Phone</th>
                 <th className="border-b p-2">Date</th>
                 <th className="border-b p-2">Actions</th>
               </tr>
@@ -186,6 +187,7 @@ export default function AdminDashboard() {
                 <tr key={item.id}>
                   <td className="border-b p-2">{item.name}</td>
                   <td className="border-b p-2">{item.email}</td>
+                  <td className="border-b p-2">{item.phone || 'N/A'}</td>
                   <td className="border-b p-2">{formatDate(item.created_at)}</td>
                   <td className="border-b p-2">
                     <button
@@ -208,6 +210,8 @@ export default function AdminDashboard() {
             <thead>
               <tr>
                 <th className="border-b p-2">Name</th>
+                <th className="border-b p-2">Email</th>
+                <th className="border-b p-2">Mobile Number</th>
                 <th className="border-b p-2">Service</th>
                 <th className="border-b p-2">Budget</th>
                 <th className="border-b p-2">Date</th>
@@ -218,6 +222,8 @@ export default function AdminDashboard() {
               {quoteRequests.map((item) => (
                 <tr key={item.id}>
                   <td className="border-b p-2">{item.name}</td>
+                  <td className="border-b p-2">{item.email}</td>
+                  <td className="border-b p-2">{item.mobile_no}</td>
                   <td className={`border-b p-2 ${getServiceBadgeColor(item.service)}`}>
                     {item.service}
                   </td>
