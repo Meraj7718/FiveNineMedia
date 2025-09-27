@@ -330,7 +330,7 @@ import { createHonoServer } from 'react-router-hono-server/node';
 import sql from '../src/app/api/utils/sql.js';
 
 // Safe route imports
-import contactRouteRaw from '../src/app/api/contact/route.js';
+import contactRouteRaw from '../src/app/api/contact/route.ts';
 import quotesRouteRaw from '../src/app/api/quotes/route.ts';
 
 const contactRoute = contactRouteRaw || {};

@@ -402,4 +402,20 @@ contact.get('/', async (c) => {
   }
 });
 
+contact.delete("/:id", async (c) => {
+  try {
+    const id = c.req.param("id");
+
+    await sql`
+      DELETE FROM contact_submissions
+      WHERE id = ${id}
+    `;
+
+    return c.json({ success: true, message: `Contact ${id} deleted` });
+  } catch (err) {
+    console.error(err);
+    return c.json({ success: false, error: "Failed to delete contact" }, 500);
+  }
+});
+
 export default contact;
