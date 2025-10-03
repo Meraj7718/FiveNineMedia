@@ -423,12 +423,18 @@ export const QuoteModal = ({ isOpen, onClose }) => {
                 disabled={isSubmitting}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2563EB] focus:border-transparent disabled:opacity-50"
               >
-                <option value="">Select a service</option>
+                {/* <option value="">Select a service</option>
                 <option value="seo">Bus Branding</option>
                 <option value="social">Social Media Advertising</option>
                 <option value="brand">Train Advertisement</option>
                 <option value="analytics">TV AID's</option>
-                <option value="all">BusStop/Railway Station Advertising</option>
+                <option value="all">BusStop/Railway Station Advertising</option> */}
+                <option value="">Select a service</option>
+                <option value="Bus Advertising">Bus Branding</option>
+                <option value="social Media Advertising">Social Media Advertising</option>
+                <option value="Train Advertising">Train Advertisement</option>
+                <option value="TV Advertising">TV Advertising</option>
+                <option value="Outdoor Advertising">BusStop / Railway Station Advertising</option>
               </select>
             </div>
 

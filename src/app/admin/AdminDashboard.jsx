@@ -83,11 +83,11 @@ export default function AdminDashboard() {
 
   const getServiceBadgeColor = (service) => {
     const colors = {
-      seo: "bg-blue-100 text-blue-800",
-      social: "bg-purple-100 text-purple-800",
-      brand: "bg-green-100 text-green-800",
-      analytics: "bg-orange-100 text-orange-800",
-      all: "bg-gray-100 text-gray-800",
+      BusAdvertising: "bg-blue-100 text-blue-800",
+      socialMedia: "bg-purple-100 text-purple-800",
+      TrainAdvertising: "bg-green-100 text-green-800",
+      TvAdvertising: "bg-orange-100 text-orange-800",
+      OutdoorBranding: "bg-gray-100 text-gray-800",
     };
     return colors[service] || "bg-gray-100 text-gray-800";
   };
