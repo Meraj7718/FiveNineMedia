@@ -1,0 +1,24 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ES2022",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "allowJs": true,
+    "allowImportingTsExtensions": true,
+    "esModuleInterop": true,
+    "verbatimModuleSyntax": true,
+    "noEmit": false,
+    "outDir": "dist",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "types": ["node", "vite/client"]
+  },
+  "include": ["__create/**/*", "src/**/*"]
+}
