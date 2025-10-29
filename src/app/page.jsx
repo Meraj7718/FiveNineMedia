@@ -89,6 +89,7 @@ import { TestimonialsSection } from "../components/TestimonialsSection.jsx";
 import { ContactSection } from "../components/ContactSection.jsx";
 import { Footer } from "../components/Footer.jsx";
 import { QuoteModal } from "../components/QuoteModal.jsx";
+import { PartnerSection } from "../components/PartnerSection.jsx";
 
 export default function Page() {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
@@ -133,7 +134,9 @@ export default function Page() {
         <AboutSection />
         <PortfolioSection />
         <TestimonialsSection />
+        <PartnerSection />
         <ContactSection />
+       
       </main>
       <Footer />
       <QuoteModal
